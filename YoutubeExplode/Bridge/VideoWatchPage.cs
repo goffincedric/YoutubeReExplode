@@ -75,6 +75,18 @@ internal partial class VideoWatchPage
             .Pipe(j => new PlayerResponse(j))
     );
 
+    public InitialData? InitialData => Memo.Cache(this, () =>
+        _content
+            .GetElementsByTagName("script")
+            .Select(e => e.Text())
+            .Select(s => Regex.Match(s, @"var\s+ytInitialData\s*=\s*(\{.*\})").Groups[1].Value)
+            .FirstOrDefault(s => !string.IsNullOrWhiteSpace(s))?
+            .NullIfWhiteSpace()?
+            .Pipe(Json.Extract)
+            .Pipe(Json.TryParse)?
+            .Pipe(j => new InitialData(j))
+    );
+
     public VideoWatchPage(IHtmlDocument content) => _content = content;
 }
 
