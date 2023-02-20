@@ -85,6 +85,19 @@ public class VideoClient
             return new Thumbnail(thumbnailUrl, thumbnailResolution);
         }).Concat(Thumbnail.GetDefaultSet(videoId)).ToArray();
 
+        Music? musicData = null;
+        if (
+            watchPage.InitialData?.EngagementPanels is [_, { Items: [_, _, { CarouselLockups: [{ InfoRows.Length: > 0 }, ..] }, ..] }, ..]
+        )
+        {
+            var infoRows = watchPage.InitialData?.EngagementPanels[1].Items[2].CarouselLockups[0].InfoRows;
+            musicData = new Music(
+                infoRows?.FirstOrDefault(row => row.Title?.ToUpper() == "SONG")?.Values?.FirstOrDefault(),
+                infoRows?.FirstOrDefault(row => row.Title?.ToUpper() == "ARTIST")?.Values,
+                infoRows?.FirstOrDefault(row => row.Title?.ToUpper() == "ALBUM")?.Values?.FirstOrDefault()
+            );
+        }
+
         return new Video(
             videoId,
             title,
@@ -99,7 +112,8 @@ public class VideoClient
                 playerResponse.ViewCount ?? 0,
                 watchPage.LikeCount ?? 0,
                 watchPage.DislikeCount ?? 0
-            )
+            ),
+            musicData
         );
     }
 }
