@@ -1,3 +1,7 @@
+# YoutubeReExplode
+A continuation of YoutubeExplode, by Tyrrrz. Added a music extraction feature that I was personally missing in this package. Might add more features in the future.
+
+Original README:
 # YoutubeExplode
 
 [![Made in Ukraine](https://img.shields.io/badge/made_in-ukraine-ffd700.svg?labelColor=0057b7)](https://tyrrrz.me/ukraine)
