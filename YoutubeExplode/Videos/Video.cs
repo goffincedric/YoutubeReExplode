@@ -49,6 +49,11 @@ public class Video : IVideo
     public Engagement Engagement { get; }
 
     /// <summary>
+    /// Music details of video (if applicable).
+    /// </summary>
+    public Music? Music { get; }
+
+    /// <summary>
     /// Initializes an instance of <see cref="Video" />.
     /// </summary>
     public Video(
@@ -60,7 +65,8 @@ public class Video : IVideo
         TimeSpan? duration,
         IReadOnlyList<Thumbnail> thumbnails,
         IReadOnlyList<string> keywords,
-        Engagement engagement)
+        Engagement engagement,
+        Music? music)
     {
         Id = id;
         Title = title;
@@ -71,6 +77,7 @@ public class Video : IVideo
         Thumbnails = thumbnails;
         Keywords = keywords;
         Engagement = engagement;
+        Music = music;
     }
 
     /// <inheritdoc />
