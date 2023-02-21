@@ -42,3 +42,15 @@ public interface IVideo
     /// </summary>
     IReadOnlyList<Thumbnail> Thumbnails { get; }
 }
+
+
+/// <summary>
+/// Properties shared by video metadata (including music metadata) resolved from different sources.
+/// </summary>
+public interface IMusicVideo : IVideo
+{
+    /// <summary>
+    /// Music details of video (if applicable).
+    /// </summary>
+    public Music? Music { get; }
+}

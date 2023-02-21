@@ -8,7 +8,7 @@ namespace YoutubeReExplode.Videos;
 /// <summary>
 /// Metadata associated with a YouTube video.
 /// </summary>
-public class Video : IVideo
+public class Video : IMusicVideo
 {
     /// <inheritdoc />
     public VideoId Id { get; }
@@ -48,9 +48,7 @@ public class Video : IVideo
     /// </summary>
     public Engagement Engagement { get; }
 
-    /// <summary>
-    /// Music details of video (if applicable).
-    /// </summary>
+    /// <inheritdoc />
     public Music? Music { get; }
 
     /// <summary>
