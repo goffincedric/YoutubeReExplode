@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
-using YoutubeExplode.Channels;
-using YoutubeExplode.Common;
 using YoutubeExplode.DemoWpf.ViewModels.Framework;
-using YoutubeExplode.Videos;
-using YoutubeExplode.Videos.ClosedCaptions;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode;
+using YoutubeReExplode.Channels;
+using YoutubeReExplode.Common;
+using YoutubeReExplode.Videos;
+using YoutubeReExplode.Videos.ClosedCaptions;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.DemoWpf.ViewModels;
 

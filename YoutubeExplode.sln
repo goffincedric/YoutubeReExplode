@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeExplode.DemoConsole"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeExplode.Tests", "YoutubeExplode.Tests\YoutubeExplode.Tests.csproj", "{5E5CDC04-EA05-46CC-8D72-970F0F0E2CD1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeExplode", "YoutubeExplode\YoutubeExplode.csproj", "{2019E360-0E05-4824-9EDE-7723AF45E10C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeReExplode", "YoutubeReExplode\YoutubeReExplode.csproj", "{2019E360-0E05-4824-9EDE-7723AF45E10C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeExplode.DemoWpf", "YoutubeExplode.DemoWpf\YoutubeExplode.DemoWpf.csproj", "{21F838B4-11B6-4C54-957A-9B7EFDE8F19E}"
 EndProject

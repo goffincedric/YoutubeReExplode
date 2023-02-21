@@ -1,9 +1,8 @@
 <Project>
-
   <PropertyGroup>
-    <Version>6.2.14</Version>
-    <Company>Tyrrrz</Company>
-    <Copyright>Copyright (C) Oleksii Holub</Copyright>
+    <Version>6.2.6</Version>
+    <Company>Tyrrrz, GoffinCedric</Company>
+    <Copyright>Copyright (C) Oleksii Holub, Goffin Cédric</Copyright>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
@@ -20,8 +19,9 @@
   <PropertyGroup>
     <Authors>$(Company)</Authors>
     <PackageTags>youtube video download playlist user channel closed caption tracks subtitles parse extract metadata info net core standard</PackageTags>
-    <PackageProjectUrl>https://github.com/Tyrrrz/YoutubeExplode</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/Tyrrrz/YoutubeExplode/blob/master/Changelog.md</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/goffincedric/YoutubeReExplode</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/goffincedric/YoutubeReExplode/blob/master/Changelog.md</PackageReleaseNotes>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <PackageIcon>favicon.png</PackageIcon>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

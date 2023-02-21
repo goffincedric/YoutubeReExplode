@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter;
 

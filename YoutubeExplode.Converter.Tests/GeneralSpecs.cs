@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using Gress;
 using Xunit;
 using Xunit.Abstractions;
 using YoutubeExplode.Converter.Tests.Utils;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode;
 
 namespace YoutubeExplode.Converter.Tests;
 

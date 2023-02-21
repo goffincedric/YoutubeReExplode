@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeExplode.Common;
-using YoutubeExplode.Exceptions;
 using YoutubeExplode.Tests.TestData;
+using YoutubeReExplode;
+using YoutubeReExplode.Common;
+using YoutubeReExplode.Exceptions;
 
 namespace YoutubeExplode.Tests;
 

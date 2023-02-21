@@ -5,6 +5,7 @@ using FluentAssertions;
 using Xunit;
 using YoutubeExplode.Tests.TestData;
 using YoutubeExplode.Tests.Utils;
+using YoutubeReExplode;
 
 namespace YoutubeExplode.Tests;
 

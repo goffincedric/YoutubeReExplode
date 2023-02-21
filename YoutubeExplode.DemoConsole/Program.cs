@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using YoutubeExplode.DemoConsole.Utils;
-using YoutubeExplode.Videos;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode;
+using YoutubeReExplode.Videos;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.DemoConsole;
 
@@ -13,7 +14,7 @@ public static class Program
 {
     public static async Task Main()
     {
-        Console.Title = "YoutubeExplode Demo";
+        Console.Title = "YoutubeReExplode Demo";
 
         var youtube = new YoutubeClient();
 
