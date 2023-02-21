@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter;
 
 /// <summary>
 /// Encapsulates conversion media format.
 /// </summary>
-[Obsolete("Use YoutubeExplode.Videos.Streams.Container instead"), ExcludeFromCodeCoverage]
+[Obsolete("Use YoutubeReExplode.Videos.Streams.Container instead"), ExcludeFromCodeCoverage]
 public readonly struct ConversionFormat
 {
     /// <summary>

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\YoutubeExplode\YoutubeExplode.csproj" />
+    <ProjectReference Include="..\YoutubeReExplode\YoutubeReExplode.csproj" />
   </ItemGroup>
 
 </Project>

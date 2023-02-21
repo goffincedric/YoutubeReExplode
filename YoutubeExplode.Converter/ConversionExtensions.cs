@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using YoutubeExplode.Converter.Utils.Extensions;
-using YoutubeExplode.Videos;
-using YoutubeExplode.Videos.ClosedCaptions;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode.Videos;
+using YoutubeReExplode.Videos.ClosedCaptions;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter;
 

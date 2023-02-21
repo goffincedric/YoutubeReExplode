@@ -5,6 +5,7 @@ using Gress;
 using Xunit;
 using Xunit.Abstractions;
 using YoutubeExplode.Converter.Tests.Utils;
+using YoutubeReExplode;
 
 namespace YoutubeExplode.Converter.Tests;
 
