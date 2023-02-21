@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using YoutubeExplode.Converter.Tests.Utils;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter.Tests;
 

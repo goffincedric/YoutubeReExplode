@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using YoutubeExplode.Converter.Utils.Extensions;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter;
 

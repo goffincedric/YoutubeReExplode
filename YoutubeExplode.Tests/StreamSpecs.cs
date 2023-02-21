@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeExplode.Exceptions;
 using YoutubeExplode.Tests.TestData;
 using YoutubeExplode.Tests.Utils;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode;
+using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Tests;
 

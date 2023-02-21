@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Xunit;
-using YoutubeExplode.Channels;
+using YoutubeReExplode.Channels;
 
 namespace YoutubeExplode.Tests;
 

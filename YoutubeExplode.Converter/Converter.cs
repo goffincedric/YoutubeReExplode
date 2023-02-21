@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CliWrap.Builders;
 using YoutubeExplode.Converter.Utils;
 using YoutubeExplode.Converter.Utils.Extensions;
-using YoutubeExplode.Videos;
-using YoutubeExplode.Videos.ClosedCaptions;
-using YoutubeExplode.Videos.Streams;
+using YoutubeReExplode.Videos;
+using YoutubeReExplode.Videos.ClosedCaptions;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter;
 
