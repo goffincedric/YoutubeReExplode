@@ -84,7 +84,12 @@ public class VideoClient
 
             return new Thumbnail(thumbnailUrl, thumbnailResolution);
         }).Concat(Thumbnail.GetDefaultSet(videoId)).ToArray();
-
+        
+        // ytInitialData
+        string? channelName = null;
+        if (watchPage.InitialData?.Contents is [_, { Runs.Count: >= 1 }, ..])
+            channelName = watchPage.InitialData?.Contents[1].Runs[0].Text;
+        
         Music? musicData = null;
         if (
             watchPage.InitialData?.EngagementPanels is [_, { Items: [_, _, { CarouselLockups: [{ InfoRows.Length: > 0 }, ..] }, ..] }, ..]
@@ -101,7 +106,7 @@ public class VideoClient
         return new Video(
             videoId,
             title,
-            new Author(channelId, channelTitle),
+            new Author(channelId, channelTitle, channelName),
             uploadDate,
             playerResponse.Description ?? "",
             playerResponse.Duration,

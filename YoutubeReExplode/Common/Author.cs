@@ -24,6 +24,11 @@ public class Author
     /// </summary>
     public string ChannelTitle { get; }
 
+    /// <summary>
+    /// Channel name.
+    /// </summary>
+    public string? ChannelName { get; }
+
     /// <inheritdoc cref="ChannelTitle" />
     [Obsolete("Use ChannelTitle instead."), ExcludeFromCodeCoverage]
     public string Title => ChannelTitle;
@@ -31,10 +36,11 @@ public class Author
     /// <summary>
     /// Initializes an instance of <see cref="Author" />.
     /// </summary>
-    public Author(ChannelId channelId, string channelTitle)
+    public Author(ChannelId channelId, string channelTitle, string? channelName = null)
     {
         ChannelId = channelId;
         ChannelTitle = channelTitle;
+        ChannelName = channelName;
     }
 
     /// <inheritdoc />
