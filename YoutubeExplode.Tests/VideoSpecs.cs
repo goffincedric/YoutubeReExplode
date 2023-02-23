@@ -29,21 +29,25 @@ public class VideoSpecs
         // Assert
         video.Id.Value.Should().Be(VideoIds.Normal);
         video.Url.Should().NotBeNullOrWhiteSpace();
-        video.Title.Should().Be("PSY - GANGNAM STYLE(강남스타일) M/V");
-        video.Author.ChannelId.Value.Should().Be("UCrDkAvwZum-UTjHmzDI2iIw");
+        video.Title.Should().Be("Ed Sheeran - Shivers [Official Video]");
+        video.Author.ChannelId.Value.Should().Be("UC0C-w0YjGpqDXGB8IHb662A");
         video.Author.ChannelUrl.Should().NotBeNullOrWhiteSpace();
-        video.Author.ChannelTitle.Should().Be("officialpsy");
-        video.UploadDate.Date.Should().Be(new DateTime(2012, 07, 15));
-        video.Description.Should().Contain("More about PSY@");
-        video.Duration.Should().BeCloseTo(TimeSpan.FromSeconds(252), TimeSpan.FromSeconds(1));
+        video.Author.ChannelTitle.Should().Be("Ed Sheeran");
+        video.Author.ChannelName.Should().Be("Ed Sheeran");
+        video.UploadDate.Date.Should().Be(new DateTime(2021, 09, 09));
+        video.Description.Should().Contain("The official video for Ed Sheeran - Shivers");
+        video.Duration.Should().BeCloseTo(TimeSpan.FromSeconds(237), TimeSpan.FromSeconds(1));
         video.Thumbnails.Should().NotBeEmpty();
         video.Keywords.Should().BeEquivalentTo(
-            "PSY", "싸이", "강남스타일", "뮤직비디오",
-            "Music Video", "Gangnam Style", "KOREAN SINGER", "KPOP", "KOERAN WAVE",
-            "PSY 6甲", "6th Studio Album", "싸이6집", "육갑"
+            "ed sheeran", "shivers", "equals", "shivers song", "ed sheeran shivers", "edsheeran",
+            "ed sheeran new single", "acoustic", "live", "cover", "official video", "lyrics", "session",
+            "ed sheeran 2021", "ed sheeran shivers official", "ed sheeran songs", "ed sheeran live",
+            "ed sheeran lyrics", "ed sheeran new song", "ed sheeran 2021 song", "pop", "pop music", "ed sheran",
+            "shivars", "band", "performance", "pub", "vocalists", "drums", "keyboard", "guitar", "live performance",
+            "band performance", "shivers lyrics", "ed sheeran elton john"
         );
-        video.Engagement.ViewCount.Should().BeGreaterOrEqualTo(4_650_000_000);
-        video.Engagement.LikeCount.Should().BeGreaterOrEqualTo(24_000_000);
+        video.Engagement.ViewCount.Should().BeGreaterOrEqualTo(263_000_000);
+        video.Engagement.LikeCount.Should().BeGreaterOrEqualTo(2_200_000);
         video.Engagement.DislikeCount.Should().BeGreaterOrEqualTo(0);
         video.Engagement.AverageRating.Should().BeGreaterOrEqualTo(0);
     }
@@ -99,10 +103,55 @@ public class VideoSpecs
         video.Author.ChannelId.Value.Should().NotBeNullOrWhiteSpace();
         video.Author.ChannelUrl.Should().NotBeNullOrWhiteSpace();
         video.Author.ChannelTitle.Should().NotBeNullOrWhiteSpace();
+        video.Author.ChannelName.Should().NotBeNullOrWhiteSpace();
         video.UploadDate.Date.Should().NotBe(default);
         video.Description.Should().NotBeNull();
         video.Duration.Should().NotBe(default);
         video.Thumbnails.Should().NotBeEmpty();
+    }
+
+    [Theory]
+    [InlineData(VideoIds.ContainsSongMetadata)]
+    [InlineData(VideoIds.ContainsLinkedSongMetadata)]
+    public async Task I_can_get_song_metadata_of_supported_music_videos(string videoId)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var video = await youtube.Videos.GetAsync(videoId);
+
+        // Assert
+        video.Music?.Song.Should().NotBeNullOrWhiteSpace();
+    }
+
+    [Theory]
+    [InlineData(VideoIds.ContainsArtistMetadata)]
+    [InlineData(VideoIds.ContainsLinkedArtistMetadata)]
+    public async Task I_can_get_artist_metadata_of_supported_music_videos(string videoId)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var video = await youtube.Videos.GetAsync(videoId);
+
+        // Assert
+        video.Music?.Artists.Should().NotBeNullOrEmpty();
+    }
+
+    [Theory]
+    [InlineData(VideoIds.ContainsAlbumMetadata)] // TODO: Find video with album link
+    public async Task I_can_get_album_metadata_of_supported_music_videos(string videoId)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var video = await youtube.Videos.GetAsync(videoId);
+
+        // Assert
+        video.Music?.Album.Should().NotBeNullOrWhiteSpace();
     }
 
     [Fact]

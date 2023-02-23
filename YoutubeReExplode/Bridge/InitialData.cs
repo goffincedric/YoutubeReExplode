@@ -11,6 +11,19 @@ internal partial class InitialData
 {
     private readonly JsonElement _content;
 
+    public IReadOnlyList<Content> Contents => Memo.Cache(this, () =>
+        _content
+            .GetPropertyOrNull("contents")?
+            .GetPropertyOrNull("twoColumnWatchNextResults")?
+            .GetPropertyOrNull("results")?
+            .GetPropertyOrNull("results")?
+            .GetPropertyOrNull("contents")?
+            .EnumerateArrayOrNull()?
+            .Select(j => new Content(j))
+            .ToArray() ??
+        Array.Empty<Content>()
+    );
+    
     public IReadOnlyList<EngagementPanel> EngagementPanels => Memo.Cache(this, () =>
         _content
             .GetPropertyOrNull("engagementPanels")?
@@ -128,6 +141,29 @@ internal partial class InitialData
                 .Select(j => new Item(j))
                 .ToArray() ??
             Array.Empty<Item>()
+        );
+    }
+}
+
+internal partial class InitialData
+{
+    public class Content
+    {
+        private readonly JsonElement _content;
+
+        public Content(JsonElement content) => _content = content;
+
+        public IReadOnlyList<Run> Runs => Memo.Cache(this, () =>
+            _content
+                .GetPropertyOrNull("videoSecondaryInfoRenderer")?
+                .GetPropertyOrNull("owner")?
+                .GetPropertyOrNull("videoOwnerRenderer")?
+                .GetPropertyOrNull("title")?
+                .GetPropertyOrNull("runs")?
+                .EnumerateArrayOrNull()?
+                .Select(j => new Run(j))
+                .ToArray() ??
+            Array.Empty<Run>()
         );
     }
 }
