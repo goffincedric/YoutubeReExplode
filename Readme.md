@@ -57,8 +57,9 @@ using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-// You can specify either video ID or URL
-var video = await youtube.Videos.GetAsync("https://youtube.com/watch?v=u_yIGGhubZs");
+// You can specify either the video URL or its ID
+var videoUrl = "https://youtube.com/watch?v=u_yIGGhubZs";
+var video = await youtube.Videos.GetAsync(videoUrl);
 
 var title = video.Title; // "Collections - Blender 2.80 Fundamentals"
 var author = video.Author.ChannelTitle; // "Blender"
@@ -67,17 +68,17 @@ var duration = video.Duration; // 00:07:20
 
 #### Downloading video streams
 
-Every YouTube video has a number of streams available, differing in containers, video quality, bit rate, frame rate, and other properties.
-Additionally, depending on the content of the stream, the streams are further divided into 3 categories:
+Every YouTube video has a number of streams available, differing in containers, video quality, bitrate, framerate, and other parameters.
+Additionally, the streams are further divided into 3 categories based on their content:
 
 - Muxed streams — contain both video and audio
 - Audio-only streams — contain only audio
 - Video-only streams — contain only video
 
 > **Warning**:
-> Muxed streams contain both audio and video, but these streams are very limited in quality (up to 720p30).
-> To download video in the highest available quality, you will need to resolve the best audio-only and video-only streams separately and then mux them together.
-> This can be accomplished by using FFmpeg together with the [**YoutubeExplode.Converter**](YoutubeExplode.Converter) package.
+> Muxed streams contain both audio and video, but these streams are limited in quality (up to 720p30).
+> To download the video in the highest available quality, you will need to resolve the best audio-only and video-only streams separately and then mux them together.
+> The muxing process can be performed using FFmpeg with the help of the [**YoutubeExplode.Converter**](YoutubeExplode.Converter) package.
 
 You can request the manifest that lists all available streams for a particular video by calling `Videos.Streams.GetManifestAsync(...)`:
 
@@ -86,12 +87,11 @@ using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var streamManifest = await youtube.Videos.Streams.GetManifestAsync(
-    "https://youtube.com/watch?v=u_yIGGhubZs"
-);
+var videoUrl = "https://youtube.com/watch?v=u_yIGGhubZs";
+var streamManifest = await youtube.Videos.Streams.GetManifestAsync(videoUrl);
 ```
 
-Once you get the manifest, you can filter through the streams and select the ones you're interested in:
+Once you get the manifest, you can filter through the streams and identify the ones you're interested in:
 
 ```csharp
 using YoutubeExplode;
@@ -134,9 +134,8 @@ using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var trackManifest = await youtube.Videos.ClosedCaptions.GetManifestAsync(
-    "https://youtube.com/watch?v=u_yIGGhubZs"
-);
+var videoUrl = "https://youtube.com/watch?v=u_yIGGhubZs";
+var trackManifest = await youtube.Videos.ClosedCaptions.GetManifestAsync(videoUrl);
 ```
 
 Then retrieve the metadata for a particular track:
@@ -160,7 +159,7 @@ var caption = track.GetByTime(TimeSpan.FromSeconds(35));
 var text = caption.Text; // "collection acts as the parent collection"
 ```
 
-You can also download the closed caption track in SRT file format with `Videos.ClosedCaptions.DownloadAsync(...)`:
+You can also download the closed caption track in the SRT file format with `Videos.ClosedCaptions.DownloadAsync(...)`:
 
 ```csharp
 // ...
@@ -179,15 +178,14 @@ using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var playlist = await youtube.Playlists.GetAsync(
-    "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6"
-);
+var playlistUrl = "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6";
+var playlist = await youtube.Playlists.GetAsync(playlistUrl);
 
 var title = playlist.Title; // "First Steps - Blender 2.80 Fundamentals"
 var author = playlist.Author.ChannelTitle; // "Blender"
 ```
 
-#### Getting videos included in a playlist
+#### Retrieving videos included in a playlist
 
 To get the videos included in a playlist, call `Playlists.GetVideosAsync(...)`:
 
@@ -196,16 +194,13 @@ using YoutubeExplode;
 using YoutubeExplode.Common;
 
 var youtube = new YoutubeClient();
+var playlistUrl = "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6";
 
 // Get all playlist videos
-var videos = await youtube.Playlists.GetVideosAsync(
-    "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6"
-);
+var videos = await youtube.Playlists.GetVideosAsync(playlistUrl);
 
 // Get only the first 20 playlist videos
-var videosSubset = await youtube.Playlists
-    .GetVideosAsync(playlist.Id)
-    .CollectAsync(20);
+var videosSubset = await youtube.Playlists.GetVideosAsync(playlistUrl).CollectAsync(20);
 ```
 
 You can also enumerate the videos iteratively without waiting for the whole list to load:
@@ -214,10 +209,9 @@ You can also enumerate the videos iteratively without waiting for the whole list
 using YoutubeExplode;
 
 var youtube = new YoutubeClient();
+var playlistUrl = "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6";
 
-await foreach (var video in youtube.Playlists.GetVideosAsync(
-    "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6"
-))
+await foreach (var video in youtube.Playlists.GetVideosAsync(playlistUrl))
 {
     var title = video.Title;
     var author = video.Author;
@@ -230,11 +224,10 @@ If you need precise control over how many requests you send to YouTube, use `Pla
 using YoutubeExplode;
 
 var youtube = new YoutubeClient();
+var playlistUrl = "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6";
 
 // Each batch corresponds to one request
-await foreach (var batch in youtube.Playlists.GetVideoBatchesAsync(
-    "https://youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6"
-))
+await foreach (var batch in youtube.Playlists.GetVideoBatchesAsync(playlistUrl))
 {
     foreach (var video in batch.Items)
     {
@@ -255,9 +248,8 @@ using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var channel = await youtube.Channels.GetAsync(
-    "https://youtube.com/channel/UCSMOQeBJ2RAnuFungnQOxLg"
-);
+var channelUrl = "https://youtube.com/channel/UCSMOQeBJ2RAnuFungnQOxLg";
+var channel = await youtube.Channels.GetAsync(channelUrl);
 
 var title = channel.Title; // "Blender"
 ```
@@ -269,51 +261,53 @@ using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var channel = await youtube.Channels.GetByUserAsync("https://youtube.com/user/BlenderFoundation");
+var channelUrl = "https://youtube.com/user/BlenderFoundation";
+var channel = await youtube.Channels.GetByUserAsync(channelUrl);
 
 var id = channel.Id; // "UCSMOQeBJ2RAnuFungnQOxLg"
 ```
 
-To get the channel metadata by slug or custom URL, use `Channels.GetBySlugAsync(...)`:
+To get the channel metadata by slug or legacy custom URL, use `Channels.GetBySlugAsync(...)`:
 
 ```csharp
 using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var channel = await youtube.Channels.GetBySlugAsync("https://youtube.com/c/BlenderFoundation");
+var channelUrl = "https://youtube.com/c/BlenderFoundation";
+var channel = await youtube.Channels.GetBySlugAsync(channelUrl);
 
 var id = channel.Id; // "UCSMOQeBJ2RAnuFungnQOxLg"
 ```
 
-To get the channel metadata by handle or handle URL, use `Channels.GetByHandleAsync(...)`:
+To get the channel metadata by handle or custom URL, use `Channels.GetByHandleAsync(...)`:
 
 ```csharp
 using YoutubeExplode;
 
 var youtube = new YoutubeClient();
 
-var channel = await youtube.Channels.GetByHandleAsync("https://youtube.com/@BeauMiles");
+var channelUrl = "https://youtube.com/@BeauMiles";
+var channel = await youtube.Channels.GetByHandleAsync(channelUrl);
 
 var id = channel.Id; // "UCm325cMiw9B15xl22_gr6Dw"
 ```
 
-#### Getting channel uploads
+#### Retrieving channel uploads
 
-To get a list of videos uploaded by a channel, call `Channels.GetUploadsAsync(...)`:
+To get the list of videos uploaded by a channel, call `Channels.GetUploadsAsync(...)`:
 
 ```csharp
 using YoutubeExplode;
 using YoutubeExplode.Common;
 
 var youtube = new YoutubeClient();
+var channelUrl = "https://youtube.com/channel/UCSMOQeBJ2RAnuFungnQOxLg";
 
-var videos = await youtube.Channels.GetUploadsAsync(
-    "https://youtube.com/channel/UCSMOQeBJ2RAnuFungnQOxLg"
-);
+var videos = await youtube.Channels.GetUploadsAsync(channelUrl);
 ```
 
-### Searching
+### Search
 
 You can execute a search query and get its results by calling `Search.GetResultsAsync(...)`.
 Each result may represent either a video, a playlist, or a channel, so you need to apply pattern matching to handle the corresponding cases:
@@ -397,7 +391,7 @@ await foreach (var batch in youtube.Search.GetResultBatchesAsync("blender tutori
 
 ## Etymology
 
-The "Explode" in **YoutubeExplode** comes from the name of a PHP function that splits up strings, [`explode(...)`](https://www.php.net/manual/en/function.explode.php). When I was starting the development of this library, most of the reference source code I read was written in PHP, hence the inspiration for the name.
+The "Explode" in **YoutubeExplode** comes from the name of a PHP function that splits up strings, [`explode(...)`](https://php.net/manual/en/function.explode.php). When I was starting the development of this library, most of the reference source code I read was written in PHP, hence the inspiration for the name.
 
 ## Related projects
 

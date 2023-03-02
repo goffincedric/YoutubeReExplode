@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>6.2.6</Version>
+    <Version>6.2.8</Version>
     <Company>Tyrrrz, GoffinCedric</Company>
     <Copyright>Copyright (C) Oleksii Holub, Goffin Cédric</Copyright>
     <LangVersion>latest</LangVersion>
@@ -31,7 +31,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../Readme.md" Pack="true" PackagePath="" Visible="false" />
     <None Include="../favicon.png" Pack="true" PackagePath="" Visible="false" />
   </ItemGroup>
 

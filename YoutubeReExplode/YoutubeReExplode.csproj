@@ -5,13 +5,16 @@
     <IsPackable>true</IsPackable>
     <PackageProjectUrl>https://github.com/goffincedric/YoutubeReExplode</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/goffincedric/YoutubeReExplode/blob/master/Changelog.md</PackageReleaseNotes>
-    <Version>6.3.0</Version>
   </PropertyGroup>
 
   <PropertyGroup>
     <Description>Abstraction layer over YouTube's internal API</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../Readme.md" Pack="true" PackagePath="" Visible="false" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="1.0.1" />
@@ -27,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'net461'">
-    <PackageReference Include="System.Text.Json" Version="7.0.1" />
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
