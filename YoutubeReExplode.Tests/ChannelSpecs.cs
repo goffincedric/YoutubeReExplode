@@ -2,11 +2,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using YoutubeExplode.Tests.TestData;
 using YoutubeReExplode;
 using YoutubeReExplode.Common;
+using YoutubeReExplode.Tests.TestData;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class ChannelSpecs
 {

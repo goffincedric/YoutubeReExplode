@@ -4,7 +4,7 @@ using Xunit;
 using YoutubeReExplode;
 using YoutubeReExplode.Common;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class SearchSpecs
 {
@@ -32,6 +32,21 @@ public class SearchSpecs
 
         // Assert
         videos.Should().HaveCountGreaterOrEqualTo(50);
+    }
+
+    [Fact]
+    public async Task I_can_get_live_video_results_from_a_search_query()
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var videos = await youtube.Search.GetVideosAsync("lofi");
+
+        // Assert
+        videos.Should().HaveCountGreaterOrEqualTo(1);
+        videos.Should().Contain(searchResult => searchResult.IsLive);
+        videos.Should().NotContain(searchResult => searchResult.IsLiveContent.HasValue);
     }
 
     [Fact]

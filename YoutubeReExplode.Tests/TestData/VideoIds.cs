@@ -1,4 +1,4 @@
-﻿namespace YoutubeExplode.Tests.TestData;
+﻿namespace YoutubeReExplode.Tests.TestData;
 
 internal static class VideoIds
 {

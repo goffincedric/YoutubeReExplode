@@ -74,6 +74,10 @@ public class SearchClient
                     videoData.ChannelId ??
                     throw new YoutubeExplodeException("Could not extract video channel ID.");
 
+                var isLive =
+                    videoData.IsLive ??
+                    throw new YoutubeExplodeException("Could not extract video channel ID.");
+
                 var videoThumbnails = videoData.Thumbnails.Select(t =>
                 {
                     var thumbnailUrl =
@@ -97,6 +101,8 @@ public class SearchClient
                     videoId,
                     videoTitle,
                     new Author(videoChannelId, videoChannelTitle),
+                    isLive,
+                    null, 
                     videoData.Duration,
                     videoThumbnails
                 );

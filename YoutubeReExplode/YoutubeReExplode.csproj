@@ -5,6 +5,7 @@
     <IsPackable>true</IsPackable>
     <PackageProjectUrl>https://github.com/goffincedric/YoutubeReExplode</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/goffincedric/YoutubeReExplode/blob/master/Changelog.md</PackageReleaseNotes>
+    <Version>7.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -30,6 +30,16 @@ public interface IVideo
     Author Author { get; }
 
     /// <summary>
+    /// Video live status.
+    /// </summary>
+    bool IsLive { get; }
+
+    /// <summary>
+    /// Checks if video was/is a livestream. (Not available for search result and playlist videos)
+    /// </summary>
+    bool? IsLiveContent { get; }
+
+    /// <summary>
     /// Video duration.
     /// </summary>
     /// <remarks>

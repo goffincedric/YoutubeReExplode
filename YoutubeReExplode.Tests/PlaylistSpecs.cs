@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeExplode.Tests.TestData;
 using YoutubeReExplode;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Tests.TestData;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class PlaylistSpecs
 {
@@ -169,6 +169,23 @@ public class PlaylistSpecs
 
         // Assert
         videos.Should().NotBeEmpty();
+    }
+
+    [Theory]
+    [InlineData(PlaylistIds.ContainsLiveStream)]
+    [InlineData(PlaylistIds.ContainsPremiere)]
+    public async Task I_can_get_livestream_videos_from_a_playlist(string playlistId)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var videos = await youtube.Playlists.GetVideosAsync(playlistId);
+
+        // Assert
+        videos.Should().NotBeEmpty();
+        videos.Should().OnlyContain(video => video.IsLive);
+        videos.Should().NotContain(video => video.IsLiveContent.HasValue); // Can't get if video is/was liveContent
     }
 
     [Fact]

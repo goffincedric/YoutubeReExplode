@@ -3,7 +3,7 @@ using FluentAssertions;
 using Xunit;
 using YoutubeReExplode.Channels;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class UserNameSpecs
 {

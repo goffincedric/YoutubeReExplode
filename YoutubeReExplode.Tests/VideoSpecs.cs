@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeExplode.Tests.TestData;
 using YoutubeReExplode;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Tests.TestData;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class VideoSpecs
 {
@@ -151,6 +151,22 @@ public class VideoSpecs
 
         // Assert
         video.Music?.Album.Should().NotBeNullOrWhiteSpace();
+    }
+
+    [Theory]
+    [InlineData(VideoIds.LiveStream, true)]
+    [InlineData(VideoIds.LiveStreamRecording, false)]
+    public async Task I_can_get_metadata_of_livestream(string videoId, bool isLive)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var video = await youtube.Videos.GetAsync(videoId);
+
+        // Assert
+        video.IsLive.Should().Be(isLive);
+        video.IsLiveContent.Should().BeTrue();
     }
 
     [Fact]

@@ -62,6 +62,14 @@ public class VideoClient
             playerResponse.ChannelId ??
             throw new YoutubeExplodeException("Could not extract video channel ID.");
 
+        var isLive =
+            playerResponse.IsLive ??
+            throw new YoutubeExplodeException("Could not extract video live status.");
+
+        var isLiveContent =
+            playerResponse.IsLiveContent ??
+            throw new YoutubeExplodeException("Could not extract video livestream status.");
+
         var uploadDate =
             playerResponse.UploadDate ??
             throw new YoutubeExplodeException("Could not extract video upload date.");
@@ -109,6 +117,8 @@ public class VideoClient
             new Author(channelId, channelTitle, channelName),
             uploadDate,
             playerResponse.Description ?? "",
+            isLive,
+            isLiveContent,
             playerResponse.Duration,
             thumbnails,
             playerResponse.Keywords,

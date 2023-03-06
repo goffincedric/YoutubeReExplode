@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using PathEx = System.IO.Path;
 
-namespace YoutubeExplode.Tests.Utils;
+namespace YoutubeReExplode.Tests.Utils;
 
 internal partial class TempFile : IDisposable
 {

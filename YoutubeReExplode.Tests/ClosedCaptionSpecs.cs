@@ -3,11 +3,11 @@ using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using YoutubeExplode.Tests.TestData;
-using YoutubeExplode.Tests.Utils;
 using YoutubeReExplode;
+using YoutubeReExplode.Tests.TestData;
+using YoutubeReExplode.Tests.Utils;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class ClosedCaptionSpecs
 {
