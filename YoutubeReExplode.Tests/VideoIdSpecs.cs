@@ -3,7 +3,7 @@ using FluentAssertions;
 using Xunit;
 using YoutubeReExplode.Videos;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class VideoIdSpecs
 {

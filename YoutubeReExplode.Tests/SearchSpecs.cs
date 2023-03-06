@@ -4,7 +4,7 @@ using Xunit;
 using YoutubeReExplode;
 using YoutubeReExplode.Common;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class SearchSpecs
 {
