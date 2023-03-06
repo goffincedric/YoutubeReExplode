@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeExplode.Tests.TestData;
-using YoutubeExplode.Tests.Utils;
 using YoutubeReExplode;
 using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Tests.TestData;
+using YoutubeReExplode.Tests.Utils;
 using YoutubeReExplode.Videos.Streams;
 
-namespace YoutubeExplode.Tests;
+namespace YoutubeReExplode.Tests;
 
 public class StreamSpecs
 {

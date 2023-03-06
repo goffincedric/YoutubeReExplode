@@ -1,4 +1,8 @@
+<<<<<<< refs/remotes/Tyrrrz/master:YoutubeExplode.Tests/TestData/VideoIds.cs
 namespace YoutubeExplode.Tests.TestData;
+=======
+﻿namespace YoutubeReExplode.Tests.TestData;
+>>>>>>> refactor: rename tests project to match package name:YoutubeReExplode.Tests/TestData/VideoIds.cs
 
 internal static class VideoIds
 {
