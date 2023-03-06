@@ -24,7 +24,6 @@ internal partial class SearchResponse
             .EnumerateDescendantProperties("videoRenderer")
             .Select(j => new VideoData(j))
             .ToArray() ??
-
         Array.Empty<VideoData>()
     );
 
@@ -33,7 +32,6 @@ internal partial class SearchResponse
             .EnumerateDescendantProperties("playlistRenderer")
             .Select(j => new PlaylistData(j))
             .ToArray() ??
-
         Array.Empty<PlaylistData>()
     );
 
@@ -42,7 +40,6 @@ internal partial class SearchResponse
             .EnumerateDescendantProperties("channelRenderer")
             .Select(j => new ChannelData(j))
             .ToArray() ??
-
         Array.Empty<ChannelData>()
     );
 
@@ -74,7 +71,6 @@ internal partial class SearchResponse
                 .GetPropertyOrNull("title")?
                 .GetPropertyOrNull("simpleText")?
                 .GetStringOrNull() ??
-
             _content
                 .GetPropertyOrNull("title")?
                 .GetPropertyOrNull("runs")?
@@ -90,7 +86,6 @@ internal partial class SearchResponse
                 .GetPropertyOrNull("runs")?
                 .EnumerateArrayOrNull()?
                 .ElementAtOrNull(0) ??
-
             _content
                 .GetPropertyOrNull("shortBylineText")?
                 .GetPropertyOrNull("runs")?
@@ -112,13 +107,33 @@ internal partial class SearchResponse
                 .GetStringOrNull()
         );
 
+        public bool? IsLive => Memo.Cache(this, () =>
+            _content
+                .GetPropertyOrNull("badges")?
+                .EnumerateArrayOrNull()?
+                .SingleOrDefault(j =>
+                    string.Equals(j
+                        .GetPropertyOrNull("metadataBadgeRenderer")?
+                        .GetPropertyOrNull("icon")?
+                        .GetPropertyOrNull("iconType")?
+                        .GetStringOrNull(), "LIVE", StringComparison.OrdinalIgnoreCase) ||
+                    new[]
+                    {
+                        "LIVE",
+                        "PREMIERE"
+                    }.Any(label => string.Equals(j
+                        .GetPropertyOrNull("metadataBadgeRenderer")?
+                        .GetPropertyOrNull("label")?
+                        .GetStringOrNull(), label, StringComparison.OrdinalIgnoreCase))
+                ) != null
+        );
+
         public TimeSpan? Duration => Memo.Cache(this, () =>
             _content
                 .GetPropertyOrNull("lengthText")?
                 .GetPropertyOrNull("simpleText")?
                 .GetStringOrNull()?
                 .ParseTimeSpanOrNull(new[] { @"m\:ss", @"mm\:ss", @"h\:mm\:ss", @"hh\:mm\:ss" }) ??
-
             _content
                 .GetPropertyOrNull("lengthText")?
                 .GetPropertyOrNull("runs")?
@@ -136,7 +151,6 @@ internal partial class SearchResponse
                 .EnumerateArrayOrNull()?
                 .Select(j => new ThumbnailData(j))
                 .ToArray() ??
-
             Array.Empty<ThumbnailData>()
         );
 
@@ -161,7 +175,6 @@ internal partial class SearchResponse
                 .GetPropertyOrNull("title")?
                 .GetPropertyOrNull("simpleText")?
                 .GetStringOrNull() ??
-
             _content
                 .GetPropertyOrNull("title")?
                 .GetPropertyOrNull("runs")?
@@ -200,7 +213,6 @@ internal partial class SearchResponse
                 .SelectMany(j => j.EnumerateArrayOrEmpty())
                 .Select(j => new ThumbnailData(j))
                 .ToArray() ??
-
             Array.Empty<ThumbnailData>()
         );
 
@@ -225,7 +237,6 @@ internal partial class SearchResponse
                 .GetPropertyOrNull("title")?
                 .GetPropertyOrNull("simpleText")?
                 .GetStringOrNull() ??
-
             _content
                 .GetPropertyOrNull("title")?
                 .GetPropertyOrNull("runs")?
@@ -242,7 +253,6 @@ internal partial class SearchResponse
                 .EnumerateArrayOrNull()?
                 .Select(j => new ThumbnailData(j))
                 .ToArray() ??
-
             Array.Empty<ThumbnailData>()
         );
 

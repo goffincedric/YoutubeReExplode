@@ -32,6 +32,16 @@ public class Video : IMusicVideo
     /// </summary>
     public string Description { get; }
 
+    /// <summary>
+    /// <inheritdoc />
+    /// </summary>
+    public bool IsLive { get; }
+
+    /// <summary>
+    /// <inheritdoc />
+    /// </summary>
+    public bool? IsLiveContent { get; }
+
     /// <inheritdoc />
     public TimeSpan? Duration { get; }
 
@@ -60,6 +70,8 @@ public class Video : IMusicVideo
         Author author,
         DateTimeOffset uploadDate,
         string description,
+        bool isLive,
+        bool? isLiveContent,
         TimeSpan? duration,
         IReadOnlyList<Thumbnail> thumbnails,
         IReadOnlyList<string> keywords,
@@ -71,6 +83,8 @@ public class Video : IMusicVideo
         Author = author;
         UploadDate = uploadDate;
         Description = description;
+        IsLive = isLive;
+        IsLiveContent = isLiveContent;
         Duration = duration;
         Thumbnails = thumbnails;
         Keywords = keywords;

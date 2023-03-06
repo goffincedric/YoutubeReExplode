@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -30,7 +30,6 @@ internal class PlaylistVideoData
             .GetPropertyOrNull("title")?
             .GetPropertyOrNull("simpleText")?
             .GetStringOrNull() ??
-
         _content
             .GetPropertyOrNull("title")?
             .GetPropertyOrNull("runs")?
@@ -46,7 +45,6 @@ internal class PlaylistVideoData
             .GetPropertyOrNull("runs")?
             .EnumerateArrayOrNull()?
             .ElementAtOrNull(0) ??
-
         _content
             .GetPropertyOrNull("shortBylineText")?
             .GetPropertyOrNull("runs")?
@@ -68,19 +66,38 @@ internal class PlaylistVideoData
             .GetStringOrNull()
     );
 
+    public bool IsLive => Memo.Cache(this, () =>
+        _content
+            .GetPropertyOrNull("badges")?
+            .EnumerateArrayOrNull()?
+            .SingleOrDefault(j =>
+                string.Equals(j
+                    .GetPropertyOrNull("metadataBadgeRenderer")?
+                    .GetPropertyOrNull("icon")?
+                    .GetPropertyOrNull("iconType")?
+                    .GetStringOrNull(), "LIVE", StringComparison.OrdinalIgnoreCase) ||
+                new[]
+                {
+                    "LIVE",
+                    "PREMIERE"
+                }.Any(label => string.Equals(j
+                    .GetPropertyOrNull("metadataBadgeRenderer")?
+                    .GetPropertyOrNull("label")?
+                    .GetStringOrNull(), label, StringComparison.OrdinalIgnoreCase))
+            ) != null
+    );
+
     public TimeSpan? Duration => Memo.Cache(this, () =>
         _content
             .GetPropertyOrNull("lengthSeconds")?
             .GetStringOrNull()?
             .ParseDoubleOrNull()?
             .Pipe(TimeSpan.FromSeconds) ??
-
         _content
             .GetPropertyOrNull("lengthText")?
             .GetPropertyOrNull("simpleText")?
             .GetStringOrNull()?
             .ParseTimeSpanOrNull(new[] { @"m\:ss", @"mm\:ss", @"h\:mm\:ss", @"hh\:mm\:ss" }) ??
-
         _content
             .GetPropertyOrNull("lengthText")?
             .GetPropertyOrNull("runs")?
@@ -98,7 +115,6 @@ internal class PlaylistVideoData
             .EnumerateArrayOrNull()?
             .Select(j => new ThumbnailData(j))
             .ToArray() ??
-
         Array.Empty<ThumbnailData>()
     );
 

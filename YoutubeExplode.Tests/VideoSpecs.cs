@@ -153,6 +153,22 @@ public class VideoSpecs
         video.Music?.Album.Should().NotBeNullOrWhiteSpace();
     }
 
+    [Theory]
+    [InlineData(VideoIds.LiveStream, true)]
+    [InlineData(VideoIds.LiveStreamRecording, false)]
+    public async Task I_can_get_metadata_of_livestream(string videoId, bool isLive)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var video = await youtube.Videos.GetAsync(videoId);
+
+        // Assert
+        video.IsLive.Should().Be(isLive);
+        video.IsLiveContent.Should().BeTrue();
+    }
+
     [Fact]
     public async Task I_can_get_the_highest_resolution_thumbnail_from_a_video()
     {

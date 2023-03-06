@@ -35,6 +35,21 @@ public class SearchSpecs
     }
 
     [Fact]
+    public async Task I_can_get_live_video_results_from_a_search_query()
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var videos = await youtube.Search.GetVideosAsync("lofi");
+
+        // Assert
+        videos.Should().HaveCountGreaterOrEqualTo(1);
+        videos.Should().Contain(searchResult => searchResult.IsLive);
+        videos.Should().NotContain(searchResult => searchResult.IsLiveContent.HasValue);
+    }
+
+    [Fact]
     public async Task I_can_get_playlist_results_from_a_search_query()
     {
         // Arrange
