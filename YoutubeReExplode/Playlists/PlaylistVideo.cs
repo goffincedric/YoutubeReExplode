@@ -29,6 +29,12 @@ public class PlaylistVideo : IVideo, IBatchItem
     public Author Author { get; }
 
     /// <inheritdoc />
+    public bool IsLive { get; }
+
+    /// <inheritdoc />
+    public bool? IsLiveContent { get; }
+
+    /// <inheritdoc />
     public TimeSpan? Duration { get; }
 
     /// <inheritdoc />
@@ -42,6 +48,8 @@ public class PlaylistVideo : IVideo, IBatchItem
         VideoId id,
         string title,
         Author author,
+        bool isLive,
+        bool? isLiveContent,
         TimeSpan? duration,
         IReadOnlyList<Thumbnail> thumbnails)
     {
@@ -49,6 +57,8 @@ public class PlaylistVideo : IVideo, IBatchItem
         Id = id;
         Title = title;
         Author = author;
+        IsLive = isLive;
+        IsLiveContent = isLiveContent;
         Duration = duration;
         Thumbnails = thumbnails;
     }
@@ -62,9 +72,11 @@ public class PlaylistVideo : IVideo, IBatchItem
         VideoId id,
         string title,
         Author author,
+        bool isLive,
+        bool? isLiveContent,
         TimeSpan? duration,
         IReadOnlyList<Thumbnail> thumbnails)
-        : this(default, id, title, author, duration, thumbnails)
+        : this(default, id, title, author, isLive, isLiveContent, duration, thumbnails)
     {
     }
 

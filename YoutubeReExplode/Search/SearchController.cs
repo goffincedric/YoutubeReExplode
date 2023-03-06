@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 <<<<<<< refs/remotes/Tyrrrz/master:YoutubeExplode/Search/SearchController.cs

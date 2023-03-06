@@ -24,6 +24,12 @@ public class VideoSearchResult : ISearchResult, IVideo
     public Author Author { get; }
 
     /// <inheritdoc />
+    public bool IsLive { get; }
+
+    /// <inheritdoc />
+    public bool? IsLiveContent { get; }
+
+    /// <inheritdoc />
     public TimeSpan? Duration { get; }
 
     /// <inheritdoc />
@@ -36,6 +42,8 @@ public class VideoSearchResult : ISearchResult, IVideo
         VideoId id,
         string title,
         Author author,
+        bool isLive,
+        bool? isLiveContent,
         TimeSpan? duration,
         IReadOnlyList<Thumbnail> thumbnails)
     {
@@ -43,6 +51,8 @@ public class VideoSearchResult : ISearchResult, IVideo
         Title = title;
         Author = author;
         Duration = duration;
+        IsLive = isLive;
+        IsLiveContent = isLiveContent;
         Thumbnails = thumbnails;
     }
 

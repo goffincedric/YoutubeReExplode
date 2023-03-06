@@ -60,6 +60,18 @@ internal partial class PlayerResponse
             .GetStringOrNull()
     );
 
+    public bool? IsLive => Memo.Cache(this, () =>
+        Details?
+            .GetPropertyOrNull("isLive")?
+            .GetBoolean() ?? false
+    );
+
+    public bool? IsLiveContent => Memo.Cache(this, () =>
+        Details?
+            .GetPropertyOrNull("isLiveContent")?
+            .GetBoolean()
+    );
+
     public DateTimeOffset? UploadDate => Memo.Cache(this, () =>
         _content
             .GetPropertyOrNull("microformat")?

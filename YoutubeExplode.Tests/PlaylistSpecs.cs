@@ -171,6 +171,23 @@ public class PlaylistSpecs
         videos.Should().NotBeEmpty();
     }
 
+    [Theory]
+    [InlineData(PlaylistIds.ContainsLiveStream)]
+    [InlineData(PlaylistIds.ContainsPremiere)]
+    public async Task I_can_get_livestream_videos_from_a_playlist(string playlistId)
+    {
+        // Arrange
+        var youtube = new YoutubeClient();
+
+        // Act
+        var videos = await youtube.Playlists.GetVideosAsync(playlistId);
+
+        // Assert
+        videos.Should().NotBeEmpty();
+        videos.Should().OnlyContain(video => video.IsLive);
+        videos.Should().NotContain(video => video.IsLiveContent.HasValue); // Can't get if video is/was liveContent
+    }
+
     [Fact]
     public async Task I_can_get_a_subset_of_videos_included_in_a_playlist()
     {
