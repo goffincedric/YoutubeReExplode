@@ -13,5 +13,4 @@ internal static class PlaylistIds
     public const string Weird = "PL601B2E69B03FAB9D";
     public const string ContainsLongVideos = "PLkk2FsMngwGi9FNkWIoNZlfqglcldj_Zs";
     public const string ContainsLiveStream = "PLEF1x2OQOdgwVyd_yP4jZeCXIZDtdbZzF";
-    public const string ContainsPremiere = "PLEF1x2OQOdgwVyd_yP4jZeCXIZDtdbZzF";
 }
