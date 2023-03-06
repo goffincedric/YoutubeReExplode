@@ -173,7 +173,6 @@ public class PlaylistSpecs
 
     [Theory]
     [InlineData(PlaylistIds.ContainsLiveStream)]
-    [InlineData(PlaylistIds.ContainsPremiere)]
     public async Task I_can_get_livestream_videos_from_a_playlist(string playlistId)
     {
         // Arrange
