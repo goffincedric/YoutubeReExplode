@@ -2,7 +2,7 @@ name: Deploy package to NuGet
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build-test-package-deploy:
