@@ -24,4 +24,5 @@ internal static class VideoIds
     public const string ContainsArtistMetadata = "h_D3VFfhvs4";
     public const string ContainsLinkedArtistMetadata = "G7KNmW9a75Y";
     public const string ContainsAlbumMetadata = "orJSJGHjBLI";
+    public const string ContainsOutOfOrderJSONMusicMetadata = "k6ZoE4RrcDs";
 }
