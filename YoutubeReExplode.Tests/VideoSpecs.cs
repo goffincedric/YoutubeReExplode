@@ -113,6 +113,7 @@ public class VideoSpecs
     [Theory]
     [InlineData(VideoIds.ContainsSongMetadata)]
     [InlineData(VideoIds.ContainsLinkedSongMetadata)]
+    [InlineData(VideoIds.ContainsOutOfOrderJsonMusicMetadata)]
     public async Task I_can_get_song_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
@@ -128,6 +129,7 @@ public class VideoSpecs
     [Theory]
     [InlineData(VideoIds.ContainsArtistMetadata)]
     [InlineData(VideoIds.ContainsLinkedArtistMetadata)]
+    [InlineData(VideoIds.ContainsOutOfOrderJsonMusicMetadata)]
     public async Task I_can_get_artist_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
@@ -142,6 +144,7 @@ public class VideoSpecs
 
     [Theory]
     [InlineData(VideoIds.ContainsAlbumMetadata)] // TODO: Find video with album link
+    [InlineData(VideoIds.ContainsOutOfOrderJsonMusicMetadata)]
     public async Task I_can_get_album_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
