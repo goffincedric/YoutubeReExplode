@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -52,7 +53,9 @@ public class VideoClient
 
         var title =
             playerResponse.Title ??
-            throw new YoutubeExplodeException("Could not extract video title.");
+            // Videos without title are legal
+            // https://github.com/Tyrrrz/YoutubeExplode/issues/700
+            "";
 
         var channelTitle =
             playerResponse.Author ??
@@ -72,6 +75,7 @@ public class VideoClient
 
         var uploadDate =
             playerResponse.UploadDate ??
+            watchPage.UploadDate ??
             throw new YoutubeExplodeException("Could not extract video upload date.");
 
         var thumbnails = playerResponse.Thumbnails.Select(t =>
@@ -92,22 +96,20 @@ public class VideoClient
 
             return new Thumbnail(thumbnailUrl, thumbnailResolution);
         }).Concat(Thumbnail.GetDefaultSet(videoId)).ToArray();
-        
+
         // ytInitialData
         string? channelName = null;
         if (watchPage.InitialData?.Contents is [_, { Runs.Count: >= 1 }, ..])
             channelName = watchPage.InitialData?.Contents[1].Runs[0].Text;
-        
+
         Music? musicData = null;
-        if (
-            watchPage.InitialData?.EngagementPanels is [_, { Items: [_, _, { CarouselLockups: [{ InfoRows.Length: > 0 }, ..] }, ..] }, ..]
-        )
+        if (watchPage.InitialData?.MusicInfoRows.Length > 0)
         {
-            var infoRows = watchPage.InitialData?.EngagementPanels[1].Items[2].CarouselLockups[0].InfoRows;
+            var musicInfoRows = watchPage.InitialData.MusicInfoRows;
             musicData = new Music(
-                infoRows?.FirstOrDefault(row => row.Title?.ToUpper() == "SONG")?.Values?.FirstOrDefault(),
-                infoRows?.FirstOrDefault(row => row.Title?.ToUpper() == "ARTIST")?.Values,
-                infoRows?.FirstOrDefault(row => row.Title?.ToUpper() == "ALBUM")?.Values?.FirstOrDefault()
+                musicInfoRows.FirstOrDefault(row => string.Equals(row.Title, "song", StringComparison.OrdinalIgnoreCase))?.Values?.FirstOrDefault(),
+                musicInfoRows.FirstOrDefault(row => string.Equals(row.Title, "artist", StringComparison.OrdinalIgnoreCase))?.Values,
+                musicInfoRows.FirstOrDefault(row => string.Equals(row.Title, "album", StringComparison.OrdinalIgnoreCase))?.Values?.FirstOrDefault()
             );
         }
 

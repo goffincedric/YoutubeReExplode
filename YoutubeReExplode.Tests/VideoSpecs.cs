@@ -74,7 +74,7 @@ public class VideoSpecs
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoUnavailableException>(async () =>
-            await youtube.Videos.GetAsync(VideoIds.NonExisting)
+            await youtube.Videos.GetAsync(VideoIds.Deleted)
         );
 
         _testOutput.WriteLine(ex.Message);
@@ -83,10 +83,11 @@ public class VideoSpecs
     [Theory]
     [InlineData(VideoIds.Normal)]
     [InlineData(VideoIds.Unlisted)]
-    [InlineData(VideoIds.EmbedRestrictedByAuthor)]
     [InlineData(VideoIds.EmbedRestrictedByYouTube)]
+    [InlineData(VideoIds.EmbedRestrictedByAuthor)]
     [InlineData(VideoIds.AgeRestrictedViolent)]
     [InlineData(VideoIds.AgeRestrictedEmbedRestricted)]
+    [InlineData(VideoIds.WithBrokenTitle)]
     public async Task I_can_get_metadata_of_any_available_video(string videoId)
     {
         // Arrange
@@ -98,7 +99,7 @@ public class VideoSpecs
         // Assert
         video.Id.Value.Should().Be(videoId);
         video.Url.Should().NotBeNullOrWhiteSpace();
-        video.Title.Should().NotBeNullOrWhiteSpace();
+        video.Title.Should().NotBeNull(); // empty titles are allowed
         video.Author.ChannelId.Value.Should().NotBeNullOrWhiteSpace();
         video.Author.ChannelUrl.Should().NotBeNullOrWhiteSpace();
         video.Author.ChannelTitle.Should().NotBeNullOrWhiteSpace();
@@ -112,6 +113,7 @@ public class VideoSpecs
     [Theory]
     [InlineData(VideoIds.ContainsSongMetadata)]
     [InlineData(VideoIds.ContainsLinkedSongMetadata)]
+    [InlineData(VideoIds.ContainsOutOfOrderJsonMusicMetadata)]
     public async Task I_can_get_song_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
@@ -127,6 +129,7 @@ public class VideoSpecs
     [Theory]
     [InlineData(VideoIds.ContainsArtistMetadata)]
     [InlineData(VideoIds.ContainsLinkedArtistMetadata)]
+    [InlineData(VideoIds.ContainsOutOfOrderJsonMusicMetadata)]
     public async Task I_can_get_artist_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
@@ -141,6 +144,7 @@ public class VideoSpecs
 
     [Theory]
     [InlineData(VideoIds.ContainsAlbumMetadata)] // TODO: Find video with album link
+    [InlineData(VideoIds.ContainsOutOfOrderJsonMusicMetadata)]
     public async Task I_can_get_album_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
