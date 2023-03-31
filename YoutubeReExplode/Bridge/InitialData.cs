@@ -23,8 +23,16 @@ internal partial class InitialData
             .ToArray() ??
         Array.Empty<Content>()
     );
-    
-    public IReadOnlyList<EngagementPanel> EngagementPanels => Memo.Cache(this, () =>
+
+    public InfoRow[] MusicInfoRows => Memo.Cache(this, () =>
+        EngagementPanels
+            .FirstOrDefault(panel => string.Equals(panel.PanelIdentifier, "engagement-panel-structured-description"))?
+            .Items.FirstOrDefault(item => string.Equals(item.Title, "music", StringComparison.OrdinalIgnoreCase))?
+            .CarouselLockups.ElementAtOrDefault(0)?.InfoRows
+        ?? Array.Empty<InfoRow>()
+    );
+
+    private IReadOnlyList<EngagementPanel> EngagementPanels => Memo.Cache(this, () =>
         _content
             .GetPropertyOrNull("engagementPanels")?
             .EnumerateArrayOrNull()?
@@ -111,6 +119,14 @@ internal partial class InitialData
 
         public Item(JsonElement content) => _content = content;
 
+        public string? Title => Memo.Cache(this, () =>
+            _content
+                .GetPropertyOrNull("videoDescriptionMusicSectionRenderer")?
+                .GetPropertyOrNull("sectionTitle")?
+                .GetPropertyOrNull("simpleText")?
+                .GetStringOrNull()
+        );
+
         public IReadOnlyList<CarouselLockup> CarouselLockups => Memo.Cache(this, () =>
             _content
                 .GetPropertyOrNull("videoDescriptionMusicSectionRenderer")?
@@ -130,6 +146,13 @@ internal partial class InitialData
         private readonly JsonElement _content;
 
         public EngagementPanel(JsonElement content) => _content = content;
+
+        public string? PanelIdentifier => Memo.Cache(this, () =>
+            _content
+                .GetPropertyOrNull("engagementPanelSectionListRenderer")?
+                .GetPropertyOrNull("panelIdentifier")?
+                .GetStringOrNull()
+        );
 
         public IReadOnlyList<Item> Items => Memo.Cache(this, () =>
             _content
