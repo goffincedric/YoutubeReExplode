@@ -7,6 +7,10 @@
     <PackageReleaseNotes>https://github.com/goffincedric/YoutubeReExplode/blob/master/Changelog.md</PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="../Readme.md" Pack="true" PackagePath="" Visible="false" />
+  </ItemGroup>
+
   <PropertyGroup>
     <Description>
       Abstraction layer over YouTube's internal API. Note: this package has limited availability in Russia and Belarus.
