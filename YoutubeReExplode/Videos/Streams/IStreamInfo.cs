@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using YoutubeExplode.Utils;
+using YoutubeReExplode.Utils;
 
 namespace YoutubeReExplode.Videos.Streams;
 

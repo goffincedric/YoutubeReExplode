@@ -4,11 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-<<<<<<< refs/remotes/Tyrrrz/master:YoutubeExplode/Videos/Streams/MediaStream.cs
-using YoutubeExplode.Utils;
-=======
-using YoutubeReExplode.Utils.Extensions;
->>>>>>> Updated namespace + package info:YoutubeReExplode/Videos/Streams/MediaStream.cs
+using YoutubeReExplode.Utils;
 
 namespace YoutubeReExplode.Videos.Streams;
 

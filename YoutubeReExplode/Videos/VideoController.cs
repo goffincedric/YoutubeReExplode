@@ -1,14 +1,8 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-<<<<<<< refs/remotes/Tyrrrz/master:YoutubeExplode/Videos/VideoController.cs
-using YoutubeExplode.Bridge;
-using YoutubeExplode.Exceptions;
-=======
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Exceptions;
-using YoutubeReExplode.Utils;
->>>>>>> Updated namespace + package info:YoutubeReExplode/Videos/VideoController.cs
 
 namespace YoutubeReExplode.Videos;
 

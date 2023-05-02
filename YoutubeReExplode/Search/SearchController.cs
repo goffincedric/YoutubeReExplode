@@ -1,13 +1,7 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-<<<<<<< refs/remotes/Tyrrrz/master:YoutubeExplode/Search/SearchController.cs
-using YoutubeExplode.Bridge;
-=======
 using YoutubeReExplode.Bridge;
-using YoutubeReExplode.Utils;
->>>>>>> Updated namespace + package info:YoutubeReExplode/Search/SearchController.cs
 
 namespace YoutubeReExplode.Search;
 

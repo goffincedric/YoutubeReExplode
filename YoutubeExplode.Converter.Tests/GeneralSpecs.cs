@@ -9,6 +9,7 @@ using Xunit;
 using Xunit.Abstractions;
 using YoutubeExplode.Converter.Tests.Utils;
 using YoutubeReExplode;
+using YoutubeReExplode.Videos.Streams;
 
 namespace YoutubeExplode.Converter.Tests;
 

@@ -1,16 +1,9 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-<<<<<<< refs/remotes/Tyrrrz/master:YoutubeExplode/Playlists/PlaylistController.cs
-using YoutubeExplode.Bridge;
-using YoutubeExplode.Exceptions;
-using YoutubeExplode.Videos;
-=======
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Exceptions;
-using YoutubeReExplode.Utils;
 using YoutubeReExplode.Videos;
->>>>>>> Updated namespace + package info:YoutubeReExplode/Playlists/PlaylistController.cs
 
 namespace YoutubeReExplode.Playlists;
 
