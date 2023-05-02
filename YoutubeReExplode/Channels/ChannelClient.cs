@@ -33,15 +33,15 @@ public class ChannelClient
     {
         var channelId =
             channelPage.Id ??
-            throw new YoutubeExplodeException("Could not extract channel ID.");
+            throw new YoutubeReExplodeException("Could not extract channel ID.");
 
         var title =
             channelPage.Title ??
-            throw new YoutubeExplodeException("Could not extract channel title.");
+            throw new YoutubeReExplodeException("Could not extract channel title.");
 
         var logoUrl =
             channelPage.LogoUrl ??
-            throw new YoutubeExplodeException("Could not extract channel logo URL.");
+            throw new YoutubeReExplodeException("Could not extract channel logo URL.");
 
         var logoSize = Regex
             .Matches(logoUrl, @"\bs(\d+)\b")

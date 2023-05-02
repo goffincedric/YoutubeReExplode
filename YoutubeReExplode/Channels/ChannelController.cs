@@ -27,7 +27,7 @@ internal class ChannelController
                 if (retriesRemaining > 0)
                     continue;
 
-                throw new YoutubeExplodeException(
+                throw new YoutubeReExplodeException(
                     "Channel page is broken. " +
                     "Please try again in a few minutes."
                 );

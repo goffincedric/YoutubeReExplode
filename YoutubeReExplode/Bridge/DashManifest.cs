@@ -16,13 +16,13 @@ internal partial class DashManifest
         _content
             .Descendants("Representation")
             // Skip non-media representations (like "rawcc")
-            // https://github.com/Tyrrrz/YoutubeReExplode/issues/546
+            // https://github.com/Tyrrrz/YoutubeExplode/issues/546
             .Where(x => x
                 .Attribute("id")?
                 .Value
                 .All(char.IsDigit) == true)
             // Skip segmented streams
-            // https://github.com/Tyrrrz/YoutubeReExplode/issues/159
+            // https://github.com/Tyrrrz/YoutubeExplode/issues/159
             .Where(x => x
                 .Descendants("Initialization")
                 .FirstOrDefault()?
