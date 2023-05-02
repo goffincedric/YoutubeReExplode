@@ -6,12 +6,12 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Bridge.Cipher;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Utils;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Videos.Streams;
 

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Search;
 

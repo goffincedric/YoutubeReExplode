@@ -4,11 +4,11 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Playlists;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Channels;
 

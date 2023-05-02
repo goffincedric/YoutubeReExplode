@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using YoutubeReExplode;
 using YoutubeReExplode.Common;
 
 namespace YoutubeReExplode.Tests;

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Utils;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Bridge;
 

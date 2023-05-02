@@ -1,7 +1,7 @@
 using System;
 using AngleSharp.Html.Dom;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Utils;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Bridge;
 

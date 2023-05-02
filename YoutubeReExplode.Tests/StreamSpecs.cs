@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeReExplode;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Tests.TestData;
 using YoutubeReExplode.Tests.Utils;

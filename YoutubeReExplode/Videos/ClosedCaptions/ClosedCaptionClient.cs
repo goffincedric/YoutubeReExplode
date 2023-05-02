@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Videos.ClosedCaptions;
 

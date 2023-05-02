@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using YoutubeReExplode;
 using YoutubeReExplode.Tests.TestData;
 using YoutubeReExplode.Tests.Utils;
 
