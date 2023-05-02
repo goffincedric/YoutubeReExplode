@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Description>
-      Abstraction layer over YouTube's internal API. Note: this package has limited availability in Russia and Belarus.
-    </Description>
+    <Description>Abstraction layer over YouTube's internal API. Note: this package has limited availability in Russia and Belarus.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
