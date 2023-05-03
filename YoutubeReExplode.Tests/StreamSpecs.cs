@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeReExplode;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Tests.TestData;
 using YoutubeReExplode.Tests.Utils;
@@ -80,7 +79,7 @@ public class StreamSpecs
         manifest.Streams.Should().NotBeEmpty();
     }
 
-    [Fact]
+    [Fact(Skip = "Preview video ID is not always available")]
     public async Task I_cannot_get_the_list_of_available_streams_on_a_paid_video()
     {
         // Arrange
@@ -268,7 +267,7 @@ public class StreamSpecs
         var youtube = new YoutubeClient();
 
         // Act & assert
-        var ex = await Assert.ThrowsAsync<YoutubeExplodeException>(async () =>
+        var ex = await Assert.ThrowsAsync<YoutubeReExplodeException>(async () =>
             await youtube.Videos.Streams.GetHttpLiveStreamUrlAsync(VideoIds.Normal)
         );
 

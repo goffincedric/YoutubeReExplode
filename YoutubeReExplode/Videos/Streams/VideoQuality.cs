@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Common;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Videos.Streams;
 

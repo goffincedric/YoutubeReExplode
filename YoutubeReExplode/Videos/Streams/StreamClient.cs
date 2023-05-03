@@ -6,12 +6,12 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Bridge.Cipher;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Utils;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Videos.Streams;
 
@@ -25,7 +25,6 @@ public class StreamClient
 
     // Because we determine the player version ourselves, it's safe to cache
     // the cipher manifest and signature timestamp for the lifetime of the client.
-    private readonly object _cipherLock = new();
     private CipherManifest? _cipherManifest;
     private string? _signatureTimestamp;
 
@@ -45,16 +44,13 @@ public class StreamClient
 
         var playerSource = await _controller.GetPlayerSourceAsync(cancellationToken);
 
-        lock (_cipherLock)
-        {
-            _cipherManifest =
-                playerSource.CipherManifest ??
-                throw new YoutubeExplodeException("Could not get cipher manifest.");
+        _cipherManifest =
+            playerSource.CipherManifest ??
+            throw new YoutubeReExplodeException("Could not get cipher manifest.");
 
-            _signatureTimestamp =
-                playerSource.SignatureTimestamp ??
-                throw new YoutubeExplodeException("Could not get signature timestamp.");
-        }
+        _signatureTimestamp =
+            playerSource.SignatureTimestamp ??
+            throw new YoutubeReExplodeException("Could not get signature timestamp.");
     }
 
     private async IAsyncEnumerable<IStreamInfo> GetStreamInfosAsync(
@@ -65,17 +61,17 @@ public class StreamClient
         {
             var itag =
                 streamData.Itag ??
-                throw new YoutubeExplodeException("Could not extract stream itag.");
+                throw new YoutubeReExplodeException("Could not extract stream itag.");
 
             var url =
                 streamData.Url ??
-                throw new YoutubeExplodeException("Could not extract stream URL.");
+                throw new YoutubeReExplodeException("Could not extract stream URL.");
 
             // Handle cipher-protected streams
             if (!string.IsNullOrWhiteSpace(streamData.Signature))
             {
                 if (_cipherManifest is null)
-                    throw new YoutubeExplodeException("Stream is protected but the cipher manifest was not resolved.");
+                    throw new YoutubeReExplodeException("Stream is protected but the cipher manifest was not resolved.");
 
                 url = UriEx.SetQueryParameter(
                     url,
@@ -95,11 +91,11 @@ public class StreamClient
 
             var container =
                 streamData.Container?.Pipe(s => new Container(s)) ??
-                throw new YoutubeExplodeException("Could not extract stream container.");
+                throw new YoutubeReExplodeException("Could not extract stream container.");
 
             var bitrate =
                 streamData.Bitrate?.Pipe(s => new Bitrate(s)) ??
-                throw new YoutubeExplodeException("Could not extract stream bitrate.");
+                throw new YoutubeReExplodeException("Could not extract stream bitrate.");
 
             // Muxed or video-only stream
             if (!string.IsNullOrWhiteSpace(streamData.VideoCodec))
@@ -163,7 +159,7 @@ public class StreamClient
             }
             else
             {
-                throw new YoutubeExplodeException("Could not extract stream codec.");
+                throw new YoutubeReExplodeException("Could not extract stream codec.");
             }
         }
     }
@@ -174,7 +170,7 @@ public class StreamClient
     {
         var playerResponse = await _controller.GetPlayerResponseAsync(videoId, cancellationToken);
 
-        // Check if the video is pay-to-play
+        // If the video is pay-to-play, error out
         if (!string.IsNullOrWhiteSpace(playerResponse.PreviewVideoId))
         {
             throw new VideoRequiresPurchaseException(
@@ -184,7 +180,7 @@ public class StreamClient
         }
 
         // If the video is unplayable, try one more time by fetching the player response
-        // with signature deciphering. This is required for age-restricted videos.
+        // with signature deciphering. This is (only) required for age-restricted videos.
         if (!playerResponse.IsPlayable)
         {
             await EnsureCipherManifestResolvedAsync(cancellationToken);
@@ -266,7 +262,7 @@ public class StreamClient
 
         if (string.IsNullOrWhiteSpace(playerResponse.HlsManifestUrl))
         {
-            throw new YoutubeExplodeException(
+            throw new YoutubeReExplodeException(
                 "Could not extract HTTP Live Stream manifest URL. " +
                 $"Video '{videoId}' is likely not a live stream."
             );

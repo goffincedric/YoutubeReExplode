@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using YoutubeReExplode;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Tests.TestData;
 
