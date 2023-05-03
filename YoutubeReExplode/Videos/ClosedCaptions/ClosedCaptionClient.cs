@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Exceptions;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Videos.ClosedCaptions;
 
@@ -35,15 +35,15 @@ public class ClosedCaptionClient
         {
             var url =
                 trackData.Url ??
-                throw new YoutubeExplodeException("Could not extract track URL.");
+                throw new YoutubeReExplodeException("Could not extract track URL.");
 
             var languageCode =
                 trackData.LanguageCode ??
-                throw new YoutubeExplodeException("Could not extract track language code.");
+                throw new YoutubeReExplodeException("Could not extract track language code.");
 
             var languageName =
                 trackData.LanguageName ??
-                throw new YoutubeExplodeException("Could not extract track language name.");
+                throw new YoutubeReExplodeException("Could not extract track language name.");
 
             yield return new ClosedCaptionTrackInfo(
                 url,
@@ -71,11 +71,11 @@ public class ClosedCaptionClient
         {
             // Captions may have no text, but we should still include them to stay consistent
             // with YouTube player behavior where captions are still displayed even if they're empty.
-            // https://github.com/Tyrrrz/YoutubeReExplode/issues/671
+            // https://github.com/Tyrrrz/YoutubeExplode/issues/671
             var text = captionData.Text ?? "";
 
             // Auto-generated captions may be missing offset or duration.
-            // https://github.com/Tyrrrz/YoutubeReExplode/discussions/619
+            // https://github.com/Tyrrrz/YoutubeExplode/discussions/619
             if (captionData.Offset is not { } offset ||
                 captionData.Duration is not { } duration)
             {
@@ -86,12 +86,12 @@ public class ClosedCaptionClient
             {
                 // Caption parts may have no text, but we should still include them to stay consistent
                 // with YouTube player behavior where captions are still displayed even if they're empty.
-                // https://github.com/Tyrrrz/YoutubeReExplode/issues/671
+                // https://github.com/Tyrrrz/YoutubeExplode/issues/671
                 var partText = p.Text ?? "";
 
                 var partOffset =
                     p.Offset ??
-                    throw new YoutubeExplodeException("Could not extract caption part offset.");
+                    throw new YoutubeReExplodeException("Could not extract caption part offset.");
 
                 return new ClosedCaptionPart(partText, partOffset);
             }).ToArray();

@@ -6,12 +6,12 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Bridge.Cipher;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Utils;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Videos.Streams;
 
@@ -46,11 +46,11 @@ public class StreamClient
 
         _cipherManifest =
             playerSource.CipherManifest ??
-            throw new YoutubeExplodeException("Could not get cipher manifest.");
+            throw new YoutubeReExplodeException("Could not get cipher manifest.");
 
         _signatureTimestamp =
             playerSource.SignatureTimestamp ??
-            throw new YoutubeExplodeException("Could not get signature timestamp.");
+            throw new YoutubeReExplodeException("Could not get signature timestamp.");
     }
 
     private async IAsyncEnumerable<IStreamInfo> GetStreamInfosAsync(
@@ -61,17 +61,17 @@ public class StreamClient
         {
             var itag =
                 streamData.Itag ??
-                throw new YoutubeExplodeException("Could not extract stream itag.");
+                throw new YoutubeReExplodeException("Could not extract stream itag.");
 
             var url =
                 streamData.Url ??
-                throw new YoutubeExplodeException("Could not extract stream URL.");
+                throw new YoutubeReExplodeException("Could not extract stream URL.");
 
             // Handle cipher-protected streams
             if (!string.IsNullOrWhiteSpace(streamData.Signature))
             {
                 if (_cipherManifest is null)
-                    throw new YoutubeExplodeException("Stream is protected but the cipher manifest was not resolved.");
+                    throw new YoutubeReExplodeException("Stream is protected but the cipher manifest was not resolved.");
 
                 url = UriEx.SetQueryParameter(
                     url,
@@ -91,11 +91,11 @@ public class StreamClient
 
             var container =
                 streamData.Container?.Pipe(s => new Container(s)) ??
-                throw new YoutubeExplodeException("Could not extract stream container.");
+                throw new YoutubeReExplodeException("Could not extract stream container.");
 
             var bitrate =
                 streamData.Bitrate?.Pipe(s => new Bitrate(s)) ??
-                throw new YoutubeExplodeException("Could not extract stream bitrate.");
+                throw new YoutubeReExplodeException("Could not extract stream bitrate.");
 
             // Muxed or video-only stream
             if (!string.IsNullOrWhiteSpace(streamData.VideoCodec))
@@ -159,7 +159,7 @@ public class StreamClient
             }
             else
             {
-                throw new YoutubeExplodeException("Could not extract stream codec.");
+                throw new YoutubeReExplodeException("Could not extract stream codec.");
             }
         }
     }
@@ -262,7 +262,7 @@ public class StreamClient
 
         if (string.IsNullOrWhiteSpace(playerResponse.HlsManifestUrl))
         {
-            throw new YoutubeExplodeException(
+            throw new YoutubeReExplodeException(
                 "Could not extract HTTP Live Stream manifest URL. " +
                 $"Video '{videoId}' is likely not a live stream."
             );

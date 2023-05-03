@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using YoutubeReExplode;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Tests.TestData;
 using YoutubeReExplode.Tests.Utils;
@@ -268,7 +267,7 @@ public class StreamSpecs
         var youtube = new YoutubeClient();
 
         // Act & assert
-        var ex = await Assert.ThrowsAsync<YoutubeExplodeException>(async () =>
+        var ex = await Assert.ThrowsAsync<YoutubeReExplodeException>(async () =>
             await youtube.Videos.Streams.GetHttpLiveStreamUrlAsync(VideoIds.Normal)
         );
 

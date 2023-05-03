@@ -4,11 +4,11 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Bridge;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Playlists;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Channels;
 
@@ -33,15 +33,15 @@ public class ChannelClient
     {
         var channelId =
             channelPage.Id ??
-            throw new YoutubeExplodeException("Could not extract channel ID.");
+            throw new YoutubeReExplodeException("Could not extract channel ID.");
 
         var title =
             channelPage.Title ??
-            throw new YoutubeExplodeException("Could not extract channel title.");
+            throw new YoutubeReExplodeException("Could not extract channel title.");
 
         var logoUrl =
             channelPage.LogoUrl ??
-            throw new YoutubeExplodeException("Could not extract channel logo URL.");
+            throw new YoutubeReExplodeException("Could not extract channel logo URL.");
 
         var logoSize = Regex
             .Matches(logoUrl, @"\bs(\d+)\b")

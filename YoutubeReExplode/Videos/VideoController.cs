@@ -30,7 +30,7 @@ internal class VideoController
                 if (retriesRemaining > 0)
                     continue;
 
-                throw new YoutubeExplodeException(
+                throw new YoutubeReExplodeException(
                     "Video watch page is broken. " +
                     "Please try again in a few minutes."
                 );
