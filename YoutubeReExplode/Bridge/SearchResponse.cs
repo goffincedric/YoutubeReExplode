@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using YoutubeReExplode.Utils.Extensions;
 using YoutubeReExplode.Utils;
+using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Bridge;
 

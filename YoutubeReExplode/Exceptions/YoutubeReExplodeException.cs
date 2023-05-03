@@ -5,13 +5,13 @@ namespace YoutubeReExplode.Exceptions;
 /// <summary>
 /// Exception thrown within <see cref="YoutubeReExplode" />.
 /// </summary>
-public class YoutubeExplodeException : Exception
+public class YoutubeReExplodeException : Exception
 {
     /// <summary>
-    /// Initializes an instance of <see cref="YoutubeExplodeException" />.
+    /// Initializes an instance of <see cref="YoutubeReExplodeException" />.
     /// </summary>
     /// <param name="message"></param>
-    public YoutubeExplodeException(string message) : base(message)
+    public YoutubeReExplodeException(string message) : base(message)
     {
     }
 }
