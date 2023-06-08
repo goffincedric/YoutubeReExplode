@@ -1,6 +1,7 @@
 <Project>
+
   <PropertyGroup>
-    <Version>7.0.6</Version>
+    <Version>7.0.7</Version>
     <Company>Tyrrrz, GoffinCedric</Company>
     <Copyright>Copyright (C) Oleksii Holub, Goffin Cédric</Copyright>
     <LangVersion>latest</LangVersion>
@@ -12,7 +13,7 @@
   </PropertyGroup>
 
   <!-- Disable nullability warnings on frameworks where BCL is not annotated -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net461'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'net461'">
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
@@ -29,9 +30,5 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="../favicon.png" Pack="true" PackagePath="" Visible="false" />
-  </ItemGroup>
 
 </Project>

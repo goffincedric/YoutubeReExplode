@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
-using YoutubeExplode.DemoWpf.ViewModels.Framework;
 using YoutubeReExplode;
 using YoutubeReExplode.Channels;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Videos;
 using YoutubeReExplode.Videos.ClosedCaptions;
 using YoutubeReExplode.Videos.Streams;
+using YoutubeExplode.Demo.Gui.ViewModels.Framework;
 
-namespace YoutubeExplode.DemoWpf.ViewModels;
+namespace YoutubeExplode.Demo.Gui.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {

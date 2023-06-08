@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,33 +8,25 @@ namespace YoutubeReExplode.Utils.Extensions;
 
 internal static class StreamExtensions
 {
-    private static async ValueTask<int> CopyBufferedToAsync(
-        this Stream source,
-        Stream destination,
-        byte[] buffer,
-        CancellationToken cancellationToken = default)
-    {
-        var bytesCopied = await source.ReadAsync(buffer, cancellationToken);
-        await destination.WriteAsync(buffer, 0, bytesCopied, cancellationToken);
-
-        return bytesCopied;
-    }
-
     public static async ValueTask CopyToAsync(
         this Stream source,
         Stream destination,
         IProgress<double>? progress = null,
         CancellationToken cancellationToken = default)
     {
-        using var buffer = PooledBuffer.ForStream();
+        using var buffer = MemoryPool<byte>.Shared.Rent(81920);
 
-        var totalBytesCopied = 0L;
-        int bytesCopied;
-        do
+        var totalBytesRead = 0L;
+        while (true)
         {
-            bytesCopied = await source.CopyBufferedToAsync(destination, buffer.Array, cancellationToken);
-            totalBytesCopied += bytesCopied;
-            progress?.Report(1.0 * totalBytesCopied / source.Length);
-        } while (bytesCopied > 0);
+            var bytesRead = await source.ReadAsync(buffer.Memory, cancellationToken);
+            if (bytesRead <= 0)
+                break;
+
+            await destination.WriteAsync(buffer.Memory[..bytesRead], cancellationToken);
+
+            totalBytesRead += bytesRead;
+            progress?.Report(1.0 * totalBytesRead / source.Length);
+        }
     }
 }
