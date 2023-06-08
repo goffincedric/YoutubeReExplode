@@ -42,7 +42,7 @@ public class StreamClient
             return _cipherManifest;
 
         var playerSource = await _controller.GetPlayerSourceAsync(cancellationToken);
-        
+
         return _cipherManifest =
             playerSource.CipherManifest ??
             throw new YoutubeReExplodeException("Could not get cipher manifest.");
