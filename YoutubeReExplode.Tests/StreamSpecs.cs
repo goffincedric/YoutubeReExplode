@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -132,7 +133,7 @@ public class StreamSpecs
     public async Task I_can_get_a_specific_stream_from_a_video(string videoId)
     {
         // Arrange
-        var buffer = new byte[1024];
+        using var buffer = MemoryPool<byte>.Shared.Rent(1024);
         var youtube = new YoutubeClient();
 
         // Act
@@ -141,7 +142,7 @@ public class StreamSpecs
         foreach (var streamInfo in manifest.Streams)
         {
             await using var stream = await youtube.Videos.Streams.GetAsync(streamInfo);
-            var bytesRead = await stream.ReadAsync(buffer);
+            var bytesRead = await stream.ReadAsync(buffer.Memory);
 
             // Assert
             bytesRead.Should().BeGreaterThan(0);
@@ -234,7 +235,7 @@ public class StreamSpecs
     }
 
     [Fact]
-    public async Task I_can_get_HTTP_live_stream_URL_from_a_video()
+    public async Task I_can_get_the_HTTP_live_stream_URL_from_a_video()
     {
         // Arrange
         var youtube = new YoutubeClient();
@@ -247,7 +248,7 @@ public class StreamSpecs
     }
 
     [Fact]
-    public async Task I_cannot_get_HTTP_live_stream_URL_from_an_unplayable_video()
+    public async Task I_cannot_get_the_HTTP_live_stream_URL_from_an_unplayable_video()
     {
         // Arrange
         var youtube = new YoutubeClient();
@@ -261,7 +262,7 @@ public class StreamSpecs
     }
 
     [Fact]
-    public async Task I_cannot_get_HTTP_live_stream_URL_from_a_non_live_video()
+    public async Task I_cannot_get_the_HTTP_live_stream_URL_from_a_non_live_video()
     {
         // Arrange
         var youtube = new YoutubeClient();

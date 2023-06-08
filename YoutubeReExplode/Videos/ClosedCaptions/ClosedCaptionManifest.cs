@@ -5,7 +5,7 @@ using System.Linq;
 namespace YoutubeReExplode.Videos.ClosedCaptions;
 
 /// <summary>
-/// Describes available closed caption tracks for a YouTube video.
+/// Describes closed caption tracks available for a YouTube video.
 /// </summary>
 public class ClosedCaptionManifest
 {
