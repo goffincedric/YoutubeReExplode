@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using YoutubeExplode.DemoConsole.Utils;
 using YoutubeReExplode;
 using YoutubeReExplode.Videos;
 using YoutubeReExplode.Videos.Streams;
+using YoutubeExplode.Demo.Cli.Utils;
 
-namespace YoutubeExplode.DemoConsole;
+namespace YoutubeExplode.Demo.Cli;
 
 // This demo prompts for video ID and downloads one media stream.
 // It's intended to be very simple and straight to the point.

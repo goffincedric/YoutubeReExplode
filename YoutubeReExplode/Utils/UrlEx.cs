@@ -7,7 +7,7 @@ using YoutubeReExplode.Utils.Extensions;
 
 namespace YoutubeReExplode.Utils;
 
-internal static class UriEx
+internal static class UrlEx
 {
     private static IEnumerable<KeyValuePair<string, string>> EnumerateQueryParameters(string url)
     {
