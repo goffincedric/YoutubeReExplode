@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Tests.TestData;
+using YoutubeReExplode.Tests.Utils;
 
 namespace YoutubeReExplode.Tests;
 
@@ -13,7 +16,7 @@ public class ChannelSpecs
     public async Task I_can_get_the_metadata_of_a_channel()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var channel = await youtube.Channels.GetAsync(ChannelIds.Normal);
@@ -29,7 +32,7 @@ public class ChannelSpecs
     public async Task I_can_get_the_metadata_of_a_channel_by_user_name()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var channel = await youtube.Channels.GetByUserAsync(UserNames.Normal);
@@ -45,7 +48,7 @@ public class ChannelSpecs
     public async Task I_can_get_the_metadata_of_a_channel_by_slug()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var channel = await youtube.Channels.GetBySlugAsync(ChannelSlugs.Normal);
@@ -61,7 +64,7 @@ public class ChannelSpecs
     public async Task I_can_get_the_metadata_of_a_channel_by_handle()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var channel = await youtube.Channels.GetByHandleAsync(ChannelHandles.Normal);
@@ -77,7 +80,7 @@ public class ChannelSpecs
     public async Task I_can_get_videos_uploaded_by_a_channel()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var videos = await youtube.Channels.GetUploadsAsync(ChannelIds.Normal);
