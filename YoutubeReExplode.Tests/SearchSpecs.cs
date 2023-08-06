@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using YoutubeReExplode.Common;
+using YoutubeReExplode.Tests.Utils;
 
 namespace YoutubeReExplode.Tests;
 
@@ -11,7 +12,7 @@ public class SearchSpecs
     public async Task I_can_get_results_from_a_search_query()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var results = await youtube.Search.GetResultsAsync("undead corporation");
@@ -24,7 +25,7 @@ public class SearchSpecs
     public async Task I_can_get_video_results_from_a_search_query()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var videos = await youtube.Search.GetVideosAsync("undead corporation");
@@ -37,7 +38,7 @@ public class SearchSpecs
     public async Task I_can_get_live_video_results_from_a_search_query()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var videos = await youtube.Search.GetVideosAsync("lofi");
@@ -52,7 +53,7 @@ public class SearchSpecs
     public async Task I_can_get_playlist_results_from_a_search_query()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var playlists = await youtube.Search.GetPlaylistsAsync("undead corporation");
@@ -65,7 +66,7 @@ public class SearchSpecs
     public async Task I_can_get_channel_results_from_a_search_query()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var channels = await youtube.Search.GetChannelsAsync("undead corporation");
