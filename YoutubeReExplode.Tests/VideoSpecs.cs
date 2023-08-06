@@ -6,6 +6,7 @@ using Xunit.Abstractions;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Tests.TestData;
+using YoutubeReExplode.Tests.Utils;
 
 namespace YoutubeReExplode.Tests;
 
@@ -19,7 +20,7 @@ public class VideoSpecs
     public async Task I_can_get_the_metadata_of_a_video()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(VideoIds.Normal);
@@ -85,7 +86,7 @@ public class VideoSpecs
     public async Task I_cannot_get_the_metadata_of_a_private_video()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoUnavailableException>(
@@ -99,7 +100,7 @@ public class VideoSpecs
     public async Task I_cannot_get_the_metadata_of_a_non_existing_video()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoUnavailableException>(
@@ -120,7 +121,7 @@ public class VideoSpecs
     public async Task I_can_get_the_metadata_of_any_available_video(string videoId)
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(videoId);
@@ -146,7 +147,7 @@ public class VideoSpecs
     public async Task I_can_get_song_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(videoId);
@@ -162,7 +163,7 @@ public class VideoSpecs
     public async Task I_can_get_artist_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(videoId);
@@ -177,7 +178,7 @@ public class VideoSpecs
     public async Task I_can_get_album_metadata_of_supported_music_videos(string videoId)
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(videoId);
@@ -192,7 +193,7 @@ public class VideoSpecs
     public async Task I_can_get_metadata_of_livestream(string videoId, bool isLive)
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(videoId);
@@ -206,7 +207,7 @@ public class VideoSpecs
     public async Task I_can_get_the_highest_resolution_thumbnail_from_a_video()
     {
         // Arrange
-        var youtube = new YoutubeClient();
+        var youtube = new YoutubeClientFactory().Create();
 
         // Act
         var video = await youtube.Videos.GetAsync(VideoIds.Normal);
