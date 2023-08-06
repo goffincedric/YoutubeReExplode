@@ -2,6 +2,28 @@
 A continuation of YoutubeExplode, by Tyrrrz. Added a music extraction feature that I was personally missing in this package.
 Might add more features in the future. Extracted music data is available in the Video class returned by the YoutubeClient.
 
+How to get cookies:
+1) Open Chrome and install [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg)
+2) Log in to youtube
+3) Open inspect element and go to the console tab
+4) Paste the following line to the console, but don't execute it yet:
+    ```
+    console.log(
+        <PASTE_CLIPBOARD_CONTENTS_HERE>
+        .map(cookie => cookie.name + ';' + cookie.value  + ';' + cookie.path + ';' + cookie.domain).join('\n')
+    )
+    ```
+5) While keeping the console tab open, open the EditThisCookie extension and export all cookies by clicking the 'Export' button
+6) Go back to the console tab and replace the text '<PASTE_CLIPBOARD_CONTENTS_HERE>' with the current clipboard contents
+7) Execute the script. The output contains a comma separated list of cookies in the following order
+   - Name
+   - Value
+   - Path
+   - Domain
+   
+To run the tests with cookies, use the method above to retrieve your cookies. Replace the newlines with commas and supply that value using the COOKIES environment variable:
+```dotnet test -e COOKIES="<PASTE_YOUR_COOKIES_HERE>"```
+
 Original README:
 # YoutubeExplode
 
