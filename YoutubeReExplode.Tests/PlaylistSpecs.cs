@@ -6,7 +6,6 @@ using Xunit.Abstractions;
 using YoutubeReExplode.Common;
 using YoutubeReExplode.Exceptions;
 using YoutubeReExplode.Tests.TestData;
-using YoutubeReExplode.Tests.Utils;
 
 namespace YoutubeReExplode.Tests;
 
@@ -21,7 +20,7 @@ public class PlaylistSpecs
     public async Task I_can_get_the_metadata_of_a_playlist()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var playlist = await youtube.Playlists.GetAsync(PlaylistIds.Normal);
@@ -42,7 +41,7 @@ public class PlaylistSpecs
     public async Task I_cannot_get_the_metadata_of_a_private_playlist()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<PlaylistUnavailableException>(async () =>
@@ -56,7 +55,7 @@ public class PlaylistSpecs
     public async Task I_cannot_get_the_metadata_of_a_non_existing_playlist()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<PlaylistUnavailableException>(async () =>
@@ -76,7 +75,7 @@ public class PlaylistSpecs
     public async Task I_can_get_the_metadata_of_any_available_playlist(string playlistId)
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var playlist = await youtube.Playlists.GetAsync(playlistId);
@@ -93,7 +92,7 @@ public class PlaylistSpecs
     public async Task I_can_get_videos_included_in_a_playlist()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var videos = await youtube.Playlists.GetVideosAsync(PlaylistIds.Normal);
@@ -130,7 +129,7 @@ public class PlaylistSpecs
     public async Task I_can_get_videos_included_in_a_large_playlist()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var videos = await youtube.Playlists.GetVideosAsync(PlaylistIds.Large);
@@ -162,7 +161,7 @@ public class PlaylistSpecs
     public async Task I_can_get_videos_included_in_any_available_playlist(string playlistId)
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var videos = await youtube.Playlists.GetVideosAsync(playlistId);
@@ -176,7 +175,7 @@ public class PlaylistSpecs
     public async Task I_can_get_livestream_videos_from_a_playlist(string playlistId)
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var videos = await youtube.Playlists.GetVideosAsync(playlistId);
@@ -191,7 +190,7 @@ public class PlaylistSpecs
     public async Task I_can_get_a_subset_of_videos_included_in_a_playlist()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var videos = await youtube.Playlists.GetVideosAsync(PlaylistIds.Large).CollectAsync(10);

@@ -23,7 +23,7 @@ public class StreamSpecs
     public async Task I_can_get_the_list_of_available_streams_on_a_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(VideoIds.WithHighQualityStreams);
@@ -71,7 +71,7 @@ public class StreamSpecs
     public async Task I_can_get_the_list_of_available_streams_on_any_playable_video(string videoId)
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(videoId);
@@ -84,7 +84,7 @@ public class StreamSpecs
     public async Task I_cannot_get_the_list_of_available_streams_on_a_paid_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoRequiresPurchaseException>(async () =>
@@ -100,7 +100,7 @@ public class StreamSpecs
     public async Task I_cannot_get_the_list_of_available_streams_on_a_private_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoUnavailableException>(async () =>
@@ -114,7 +114,7 @@ public class StreamSpecs
     public async Task I_cannot_get_the_list_of_available_streams_on_a_non_existing_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoUnavailableException>(async () =>
@@ -134,7 +134,7 @@ public class StreamSpecs
     {
         // Arrange
         using var buffer = MemoryPool<byte>.Shared.Rent(1024);
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(videoId);
@@ -163,7 +163,7 @@ public class StreamSpecs
     {
         // Arrange
         using var file = TempFile.Create();
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(videoId);
@@ -182,7 +182,7 @@ public class StreamSpecs
     {
         // Arrange
         using var file = TempFile.Create();
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(VideoIds.Normal);
@@ -201,7 +201,7 @@ public class StreamSpecs
     {
         // Arrange
         using var file = TempFile.Create();
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(VideoIds.Normal);
@@ -220,7 +220,7 @@ public class StreamSpecs
     {
         // Arrange
         using var buffer = new MemoryStream();
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var manifest = await youtube.Videos.Streams.GetManifestAsync(VideoIds.Normal);
@@ -238,7 +238,7 @@ public class StreamSpecs
     public async Task I_can_get_the_HTTP_live_stream_URL_from_a_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act
         var url = await youtube.Videos.Streams.GetHttpLiveStreamUrlAsync(VideoIds.LiveStream);
@@ -251,7 +251,7 @@ public class StreamSpecs
     public async Task I_cannot_get_the_HTTP_live_stream_URL_from_an_unplayable_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<VideoUnplayableException>(async () =>
@@ -265,7 +265,7 @@ public class StreamSpecs
     public async Task I_cannot_get_the_HTTP_live_stream_URL_from_a_non_live_video()
     {
         // Arrange
-        var youtube = new YoutubeClientFactory().Create();
+        var youtube = new YoutubeClient();
 
         // Act & assert
         var ex = await Assert.ThrowsAsync<YoutubeReExplodeException>(async () =>
