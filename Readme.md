@@ -1,3 +1,8 @@
+# YoutubeReExplode
+A continuation of YoutubeExplode, by Tyrrrz. Added a music extraction feature that I was personally missing in this package.
+Might add more features in the future. Extracted music data is available in the Video class returned by the YoutubeClient.
+
+Original README:
 # YoutubeExplode
 
 [![Status](https://img.shields.io/badge/status-maintenance-ffd700.svg)](https://github.com/Tyrrrz/.github/blob/master/docs/project-status.md)
