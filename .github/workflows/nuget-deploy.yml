@@ -18,7 +18,7 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Run unit tests
-        run: dotnet test YoutubeReExplode.Tests --configuration Release --environment COOKIES="${{secrets.COOKIES}}"
+        run: dotnet test YoutubeReExplode.Tests --configuration Release
 
       - name: Generate nuget package
         run: dotnet pack YoutubeReExplode --configuration Release -o nupkg
