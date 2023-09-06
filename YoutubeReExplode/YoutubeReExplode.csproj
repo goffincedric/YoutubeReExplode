@@ -7,6 +7,7 @@
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
     <PackageProjectUrl>https://github.com/goffincedric/YoutubeReExplode</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/goffincedric/YoutubeReExplode/blob/master/Changelog.md</PackageReleaseNotes>
+    <Version>7.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
