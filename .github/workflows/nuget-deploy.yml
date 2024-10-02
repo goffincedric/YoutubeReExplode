@@ -1,0 +1,27 @@
+name: Deploy package to NuGet
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-test-package-deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run unit tests
+        run: dotnet test YoutubeReExplode.Tests --configuration Release
+
+      - name: Generate nuget package
+        run: dotnet pack YoutubeReExplode --configuration Release -o nupkg
+
+      - name: Push packages
+        run: dotnet nuget push './nupkg/*.nupkg' --api-key ${{secrets.NUGET_KEY}} --source https://api.nuget.org/v3/index.json

@@ -1,9 +1,9 @@
 <Project>
 
   <PropertyGroup>
-    <Version>0.0.0-dev</Version>
-    <Company>Tyrrrz</Company>
-    <Copyright>Copyright (C) Oleksii Holub</Copyright>
+    <Version>7.2.3</Version>
+    <Company>Tyrrrz, GoffinCedric</Company>
+    <Copyright>Copyright (C) Oleksii Holub, Goffin Cédric</Copyright>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -21,8 +21,10 @@
     <Authors>$(Company)</Authors>
     <Description>Abstraction layer over YouTube's internal API. Note: this package has limited availability in Russia and Belarus.</Description>
     <PackageTags>youtube video download playlist user channel closed caption tracks subtitles parse extract metadata info net core standard</PackageTags>
-    <PackageProjectUrl>https://github.com/Tyrrrz/YoutubeExplode</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/Tyrrrz/YoutubeExplode/releases</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/goffincedric/YoutubeReExplode</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/goffincedric/YoutubeReExplode/releases</PackageReleaseNotes>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageIcon>favicon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
